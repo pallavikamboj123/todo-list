@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+	h1
+	{
+		background: #2980b9;
+		color: white;
+		margin: 0;
+		padding: 10px 20px;
+		text-transform: uppercase;
+		font-size: 24px;
+		font-weight: normal;
+	}
+	h1 i
+	{
+		float: right;
+	}
+	ul
+	{
+		list-style: none;
+		margin:0;
+		padding:0;
+	}
+	body
+	{
+		font-family: roboto;
+	}
+	li
+	{
+		background: white;
+		height: 40px;
+		line-height: 40px;
+		color: #666;
+	}
+	li:nth-child(2n)
+	{
+		background: #f7f7f7;
+	}
+	input
+	{
+		font-size: 18px;
+		background: #f7f7f7;
+		padding: 13px 13px 13px 20px;
+		width: 100%;
+		box-sizing: border-box;
+		color: #2980b9;
+		border: 3px solid rgba(0,0,0,0);
+	}
+	input:focus
+	{
+		background: white;
+		border: 3px solid #2980b9;
+		outline: none;
+	}
+	body
+	{
+		 
+		background: linear-gradient(90deg, #2BC0E4 10%, #EAECC6 90%); 
+
+	}
+	span
+	{
+		background: red;
+		height: 40px;
+		margin-right: 20px;
+		text-align: center;
+		color: white;
+		width: 0;
+		display: inline-block;
+		transition: 0.2s linear;
+		opacity: 0;
+	}
+	li:hover span
+	{
+		width: 40px;
+		opacity: 1;
+	}
+	#container
+	{
+	
+		width: 360px;
+		margin: 100px auto;
+		background: #f7f7f7;
+		box-shadow: 0 0 3px rgba(0,0 ,0 , 0.2);
+	}
+	</style>
+	<script src="jquery-2.1.4.min.js"> </script>
+</head>
+<body>
+	<div id="container">
+	<h1>TO-DO LIST  <i id="icon" class="fa fa-plus"></i></h1>
+	<input type="text" placeholder="Add New Todo">
+	<ul>
+		<li><span><i class="fa fa-trash"></i></span>Go to dance class</li>
+		<li><span> <i class="fa fa-trash"></i> </span> Buy korean style t-shirts</li>
+		<li><span><i class="fa fa-trash"></i>  </span>Find an internship </li>
+		<li><span><i class="fa fa-trash"></i>  </span> Score good in next semester</li>
+		<li><span><i class="fa fa-trash"></i>  </span> Stop giving a fuck </li>
+	</ul>
+	</div>
+	<script>
+		$("ul").on("click","li",function()
+		{
+			if($(this).css("color") === "rgb(128, 128, 128)")
+			{
+				$(this).css("color","black");
+				$(this).css("text-decoration","none");
+			}
+			else
+			{
+				$(this).css("color","gray");
+			$(this).css("text-decoration","line-through");
+			}
+			
+		});
+		$("ul").on("click","span", function()
+		{
+			$(this).parent().fadeOut(500,function()
+				{
+					$(this).remove();
+				});
+			$(this).stopPropagation();
+		});
+
+		$("input[type='text']").keypress(function(event)
+		{
+			if(event.which == 13)
+			{
+				
+				var todotext = $(this).val();
+				$(this).val(""); 
+				$("ul").append( "<li><span><i class='fa fa-trash'></i></span> " +  todotext + "</li>" );
+			}
+		});
+		$("#icon").on("click", function()
+		{
+			$("input[type='text']").slideToggle(100);
+		});
+	</script>
+</body>
+</html>
